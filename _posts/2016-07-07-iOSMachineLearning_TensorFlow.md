@@ -1,161 +1,293 @@
 ---
 layout: post
-title: iOS开发迎来机器学习的春天---TensorFlow 
+title: 小程序常见问题汇总，方便自己看 
 date: 2016-07-07 
-tags: 机器学习    
+tags: 小程序常见问题汇总，方便自己看    
 ---
 
-<div align="center">
-	<img src="/images/posts/tfimg/logo.jpg" height="300" width="500">  
-</div> 
+Q1： scroll-view 在 iOS 上存在 bug：在使用 scroll-view 作为全屏滑动组件的时候，Y 轴滑动在下拉触发 iOS 原生的橡皮筋效果时， scroll-view 出现不能滑动的 bug，在 Android 系统下无橡皮筋效果则没有这个 bug。
 
-　　`人工智能`、`机器学习`都已走进了我们的日常，尤其是愈演愈热的大数据更是跟我们的生活息息相关，做 `人工智能`、`数据挖掘`的人在其他人眼中感觉是很高大上的，总有一种遥不可及的感觉，在我司也经常会听到数据科学部的同事们提到 `机器学习`、`数据挖掘` 之类的词。但这些名词真的跟我们移动开发就没直接关系了吗？             
-　　作为移动开发者来说，无时无刻不被这些名词狠狠地敲打着脆弱的内心。💢 💢 💢  何时才能够将`机器学习`、`深度学习`应用在移动端，敲响移动端`机器学习`工业化的大门呢？
+A：下个版本会解决。
 
-> 想象一下，某一天你身处一个完全陌生的环境，周围都是陌生的事物，而运行在iPhone的某个APP却对这个环境了如指掌，你要做的就是打开这个APP，输入你需要了解的事物，iPhone告诉你这个事物的信息，你也就没有了陌生事物了。世界就在眼前！
+Q2：微信 6.3.31 版本中 input 的 focus 无效。
 
-如下图：
-<div align="center">
-	<img src="/images/posts/tfimg/image02.png" height="300" width="480" />
-</div> 
+A：下个版本会解决。
 
-上面物体的识别准确率还是蛮不错的，基本识别出了键盘（49%的概率）、鼠标（46%的概率）和水杯（24%的概率）。
+Q3： tabBar 图标在各个平台上的大小不一致，是怎么回事？
 
-但是在某些事物的识别准确度方便却差强人意，比如下图：    
+A：我们已知晓这个问题，会尽快解决。
 
-<div align="center">
-　　<img src="/images/posts/tfimg/image01.png" height="300" width="320" />
-</div> 
-　　iPhone 6被识别成了iPod（59%的概率），而iPod的却是不怎么敢认（10%的概率）。想想最崩溃的估计是iPhone 6了，身价直接被降了好几个等级。
+Q4：在 iOS 使用导航跳转页面的时候，偶尔会出现白屏的 bug。
 
-<div align="center">
-　　<img src="/images/posts/tfimg/wq.jpg" height="320" width="240" />  
-</div> 
+A：我们已经发现这个问题，下个版本会解决。
 
-　　上面的例子来自于TensorFlow官方iOSDemo，暂且不评述TensorFlow的识别准确度如何，毕竟它还年轻，但是仅凭其识别能力的体现，也给机器学习在移动端的运用带来了无限的可能。
+Q5：iOS 上返回导航栏存在被修改的 bug。
 
-### 一、TensorFlow（简称TF）
+A： tabBar 的问题已经知晓，下个版本会增加 switchTab 的接口让开发者直接控制 tabBar 的切换。
 
-　　去年，Google资深系统专家Jeff Dean在湾区机器学习大会上隆重介绍了其第二代深度学习系统[TensorFlow](http://www.tensorflow.org/)，一时间网络上针对TensorFlow的文章铺天盖地，[揭秘TensorFlow：Google开源到底开的是什么？](http://www.leiphone.com/news/201511/UDLyNds2oSTwM2yZ.html)、[Google开源TensorFlow系统，这背后都有什么门道？](http://www.leiphone.com/news/201511/Voza1pFNQB4bzKdR.html)、[如何评价Google发布的第二代深度学习系统TensorFlow?](http://www.zhihu.com/question/37243838)等等文章，TensorFlow的燎原之火一直在燃烧蔓延着，其[GitHub上的开源库](https://github.com/tensorflow/tensorflow)在此文撰写时，也已经被`star：27550`，`fork：11054`了。🔥 🔥 🔥 🔥 🔥 
+Q6：地图覆盖物无法添加点击事件，无法获取用户点击了那个覆盖物。
 
-不负众望，Google一直宣称平台移植性非常好的TensorFlow，终于在2016年6月27日，发布0.9版本，宣布移动端支持。[TensorFlow v0.9 now available with improved mobile support](https://developers.googleblog.com/2016/06/tensorflow-v09-now-available-with.html)( 有墙💢 )，同时也给出了移动端的[Demo](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/contrib/ios_examples)，对于代码为生的程序员，身处大数据处理为主导的[TalkingData](http://www.talkingdata.com/)，也小试身手了一把，下载TensorFlow源码，查看编译指南，开始跳坑、填坑之路，也成就了此篇拙文的产生。
+A：下个版本会支持。
 
+Q7：小程序是否可以变相支持 webview ？
 
-### 二、从TensorFlow到iOS静态库
+A：不能。
 
-对于iOS平台下如何使用TensorFlow，TensorFlow给出了详细的编译脚本命令，详情请查看[官方文档的命令](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/contrib/makefile)。
+Q8： swiper 如何实现循环轮播？
 
-##### 第一步. 工具准备
+A：下个版本会支持 circular 属性。
 
-`工欲善其事必先利其器`，在开始编译工作之前，需要准备一些编译所必须的工具：
+Q9：Android 微信更新至 6.3.32 后，不支持从普通页跳转到带 tab 栏的页面。
 
-1.  [Homebrew](http://brew.sh/): Mac os x 上包管理工具，具体使用方法可参考[Doc](http://brew.sh/index_zh-cn.html)。
+A：新版本会有专门的 API 来跳转到 tabbar 的页面，之前的处理方式会有逻辑问题。
 
-```
-$ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-```
+Q10：快速点击多个 input 时，会出现问题。
 
-2. Homebrew安装好之后，依次安装三个辅助性编译工具：
+A：此处确实有 bug，已经修复了，待发版本。
 
-```
-$ brew install libtool   
-$ brew install autoconf   
-$ brew install automake   
-```
+Q11：调试时，WXML 经常出现空白的情况。
 
-> 三个工具的含义，请参考：[https://en.wikipedia.org/wiki/GNU_Libtool](https://en.wikipedia.org/wiki/GNU_Libtool)
+A：已经修复，下个版本的开发工具将会 fix 这个问题。
 
+Q12： textarea 可以监听输入吗？只有在没有焦点的时候才能获得内容吗？可不可以与 input 一样，随时监听输入的内容？
 
-##### 第二步. 克隆TensorFlow
+A：线上版本 textarea 不支持直接监听输入，下一个版本加会加上 bindinput 支持。
 
-Google以[Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0)开源协议将TensorFlow开源在[GitHub](https://github.com/tensorflow/tensorflow)上，我们可以直接使用TensorFlow源码。
+Q13： scroll-view 重叠时，会出现事件穿透的问题。
 
-在任意你想存放TensorFlow源码的地方（建议不要放在桌面。^_^），clone项目。
+A： scroll-view 的事件穿透是组件的 bug，后续会修复。
 
-```
-$ git clone https://github.com/tensorflow/tensorflow 
-```
+Q14：Android 下， 1rpx 的 border 可能会出现不显示的问题。
 
-##### 第三步. 编译前准备 
+A：在部分 Android 的手机中存在小数值的 rpx 显示不全的问题，新版本的微信将修复这个问题。
 
-　　在TensorFlow的`tensorflow/contrib/makefile/`目录下，有很多可使用的编译脚本，其中`build_all_ios.sh`脚本专门用来一键编译TensorFlow iOS静态库。虽然可以直接使用此脚本进行一键编译，但是因为有墙，某些依赖需要提前做处理。
+Q15：在真机调试环境下， scroll-view 里面有 textarea ，它的内容无法变动。
 
-1. 下载protobuf
+A：输入框目前还不能放到 scroll-view 里面使用。
 
-    protobuf 是编译前唯一需要特殊处理的依赖库，[点击下载](https://github.com/google/protobuf/archive/master.zip)，下载protobuf之后，解压，备用。
+Q16：能否从小程序中打开普通的网页链接 ？
 
+A：暂时不支持。
 
-2. 下载googlemock
+Q17：请问微信小程序的组件中有没有多行文本的组件？
 
-    虽然protobuf编译脚本`autogen.sh`中的googlemock链接地址`https://googlemock.googlecode.com/files/gmock-1.7.0.zip`无法直接下载到，但是细心的人会发现，在浏览器中输入`https://googlemock.googlecode.com/`地址后，会跳转到`https://github.com/google/googlemock`地址，google在GiHub上的仓库地址。而GitHub上的仓库，我们可以直接的下载，克隆等。
+A：6.3.30 已支持 textarea 组件。
 
-    我们直接在GitHub上下载googlemock([点击下载](https://github.com/google/googlemock/archive/master.zip))，下载完成后，修改压缩包名字为`gmock-1.7.0.zip`，修改后将此压缩包移至上一步protobuf文件夹目录下，备用。
+Q18：我在 WXSS 文件里编写 CSS 3 动画，点击编译直接就报错了，编译不通过。
 
-3. 修改下载依赖脚本，移除protobuf的下载
+A：CSS 3 的更多特性，我们正在陆续支持中。目前部分功能支持不足，如 animation 动画。
 
-	在`tensorflow/contrib/makefile/`目录下，`download_dependencies.sh`脚本用来下载相关依赖，打开此脚本文件，注释掉或者直接删掉`git clone https://github.com/google/protobuf.git ${DOWNLOADS_DIR}/protobuf`部分，目的是不让脚本去下载protobuf。
+Q19：我们发现，目前提供的 canvas 绘图接口，不能跟网页原生 API 兼容，所以也就无法使用现有的绘图库了是吗？
 
-	上面三步准备好后，接下来就进入静态库编译了。
+A：是的。
 
-##### 第四步. 一键编译  
+Q20：在微信小程序的 canvas 相关 API 中，我们发现缺少将 canvas 转换成图片的相关 API 接口，如 drawImage 系列接口。
 
-　　前面已经知道在TensorFlow文件夹`tensorflow/contrib/makefile/`目录下的`build_all_ios.sh`脚本是用来编译iOS静态库的脚本，因此可以直接执行此脚本，开始静态库的编译工作了。
+A：6.3.30 已支持 wx.canvasToTemFilePath ，可以用于将 canvas 转成图片临时文件路径。
 
-　　但是有一个问题大家可能会发现，由于编译TensorFlow需要用到protobuf，但是protobuf使我们自己手动下载的，该怎么让手动下载的protobuf能够直接让`build_all_ios.sh`脚本使用呢？
+Q21：我在文档中看到了 template ，但是似乎只能绑定数据。如果我想绑定事件该怎么办？还是在小程序里有其他办法实现组件化？
 
-　　答案是`复制、粘贴`。可能有些low，但是有效。执行命令 `build_all_ios.sh`之后，立即把之前手动下载的protobuf文件夹拷贝进`tensorflow/contrib/makefile/downloads`目录。（放心，你拷贝的速度会很快，不会影响编译的执行的。^_^） 
+A：目前暂不支持，我们很快将提供自定义组件。
 
-```
-$ build_all_ios.sh    
-```
+Q22：最近在看微信的小程序开发，有个顶部 Tab 需求，查看文档没有发现此组件，看到设计规范上有，请问如何调用？
 
-　　一切准备就绪，接下来就是静静的等待编译完成了。在Mac编译的过程中，建议插上电源，最好不要让设备休眠断电，也最好不要去干别的东西，出去溜达一圈，回来后就看到战果了。
+A：6.3.30 已支持在 tabBar 设置 position 参数。
 
- 编译完成之后，会在`tensorflow/contrib/makefile/gen/`目录下看到编译的结果，关于这些静态库该如何使用，自己的项目如何应用，请参考[TensorFlow iOS Examples](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/contrib/ios_examples)。
+Q23：在小程序的 API 中是否有获取图片原始宽高的接口？
 
+A：6.3.30 已支持， image 组件的 bindload 事件可以返回图片的原始宽高。
 
-### 三、遇到的问题
+Q24：请问小程序能引用外部的图表库吗，比如 ECharts？
 
-1、googlecode.com被墙了，需要翻墙！（目前测试挂了VPN也没用），这也是上面编译前准备为什么要那么做的原因。
+A：暂不支持。
 
-```
-curl: (7) Failed to connect to googlemock.googlecode.com port 443: Operation timed out
-```
+Q25：小程序开发时，能否使用自定义的字体图标？
 
-解决： 请参考 『第三步. 编译前准备』。
+A：自定义字体是支持的，但是需要使用线上字体，并且存放字体的服务器需要允许跨域。
 
-2、没有Xcode。
+Q26：小程序中如何显示富文本内容？我已经在小程序中加入了 div 和样式，发现样式都无效。
 
-```
-xcrun: error: SDK "iphoneos" cannot be located
-xcrun: error: SDK "iphoneos" cannot be located
-xcrun: error: unable to lookup item 'PlatformPath' in SDK 'iphoneos'
-+ IPHONEOS_PLATFORM=
-```
+A：目前暂不支持在小程序中进行相应操作。
 
-解决：安装Xcode，从上面报错的命令中可以看到，在编译静态库的过程中使用了`xcrun`，而此命令是xCode本身具有的能力。
+Q27：我在文档中，没看到如何修改右上角三个点操作区按钮的方法。
 
-3、你的Xcode版本不是7.3或以后，或者你有多个Xcode，而默认的安装路径版本不是7.3或以后。
+A：这里不支持自定义，统一显示官方按钮。
 
-```
-error: Xcode 7.3.0 or later is required.
-+ exit 1
-```/
+Q28：我这在布局的时候用到了 rpx 单位，在安卓手机（小米 4）下真机预览的时候 750rpx 并显示全屏，经过测试发现在安卓手机（小米4）下 850rpx 才能显示全屏。但文档里面写道：规定屏幕宽为 750rpx ，这是不是意味着开发者需要适配不一样的手机？
 
-解决：更新Xcode至最新版本，并且保证默认路径下是最新/版本。
+A：我们会持续优化 rpx ，兼容大部分主流机型。不需要开发者做适配。
 
-如果Xcode是7.3，并且没有条件更新Xcode，你可以修改`tensorflow/contrib/makefile/compile_ios_tensorflow.sh` 里的`REQUIRED_XCODE_VERSION=7.3.0`，为`REQUIRED_XCODE_VERSION=7.3`。（这样修改，目前还不确定会不会带来一些其他影响，最好是升级你的Xcode）
+Q29：滚动页面，滚动到底部，加载新的内容不能实现。
 
+A：6.3.30 已支持页面配置 onReachBottom 事件。
 
-### 四、参考链接 
- 
+Q30：文章中的 image ，如果想单击后浏览图片，可以放大缩小之类，有没有相关接口？
 
-* [TensorFlow 中文社区](http://tensorfly.cn/)
-* [TensorFlow for Mobile](https://www.tensorflow.org/mobile.html)
-* [Caffe、TensorFlow、MXnet三个开源库对比](http://chenrudan.github.io/blog/2015/11/18/comparethreeopenlib.html)   
-* [如何评价Tensorflow和其它深度学习系统](http://weibo.com/p/1001603907610737775666)    
-* [深度学习框架大战正在进行，谁将夺取“深度学习工业标准”的荣耀？](http://www.algorithmdog.com/%E8%B0%81%E5%B0%86%E5%A4%BA%E5%8F%96%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%B7%A5%E4%B8%9A%E6%A0%87%E5%87%86%E7%9A%84%E8%8D%A3%E8%80%80)  
+A：可以使用图片预览接口。
 
-<br>
+Q31：我在使用贵方提供的 canvas 组件时，并没有找到一个可以保存画布信息的接口。
 
-转载请注明：[潘柏信的博客](http://baixin) » [点击阅读原文](http://baixin.io/2016/07/iOSMachineLearning_TensorFlow/)        
+A：暂不支持，我们会很快支持。
+
+逻辑 / 能力 FAQ
+
+Q1：小程序没有提供相关的 API 进行扫码吗？
+
+A：接下来会增加 API 来支持相关功能。
+
+Q2：开发工具上连接含有端口的地址没有问题，一到真机上就提示： connectSocket：fail url not in domain list 。
+
+A：不能使用带端口的地址。
+
+Q3：切换微信号后上次的数据缓存还会有吗？
+
+A：不会清除，但别的用户登录以后，是访问不到上一个用户遗留的数据的。
+
+Q4：官方的 ES6 转 ES5 在 Android 上会报错。
+
+A：开发工具提供的 ES6 转 ES5 的功能，只会转换语法，新的 ES6 的 API 例如 Promise 等需要开发者自行引入 Polyfill 或者别的类库来解决。
+
+Q5：附件上传支持多个文件一起上传吗？另外上传过程的进度条怎么显示？
+
+A：当前版本不支持并行上传，开发者需要自行转为串行处理，并自行处理 loading 状态。
+
+Q6： uploadfile 的 header 里面带不了 cookie 参数？
+
+A：6.3.31 版本的 iOS 客户端有这个 bug， 新版本即将修复。
+
+Q7： wx.getImageInfo 在 Android 上有取不到信息的 bug。
+
+A：6.3.31 版本 Android 客户端有这个 bug， 新版本将修复。
+
+Q8：业务有需要，监听手机 keyboard，如「完成」按钮触发时，执行对应动作。目前未查到相关 API，请问是否有支持？或有其它方式模拟实现。
+
+A：输入框（ input / textarea ） 后续会提供 bindconfirm 的事件监听属性 ，用于监听「完成」按钮的点击。
+
+Q9：微信小程序在模拟器上使用 HTTPS 能访问到数据，但是真机上不能建立数据连接。
+
+A：请检查 wx.request 返回的错误信息，根据错误信息进行修改。
+
+Q10：小程序的大小 1 MB 这个控制正式发布的时候会放大吗？
+
+A：不会放大。
+
+Q11：已用 HTTPS 连接，但报无法建立与该服务器的安全连接是什么情况？
+
+A：需要 Nginx 配置 HTTPS 的加密标准为 TLS 1.2 及以上。
+
+Q12： request 只支持异步模式？建议支持同步。
+
+A：（1） request 操作耗时依赖网络，同步会给用户带来不好的操作体验；（2）传递参数通过 date-set 设置；（3）动态逻辑可以放到绑定的方法中。
+
+Q13：是否支持视频直播或音频直播，如 HLS？
+
+A：我们正在技术上正不断完善，很快将提供支持。
+
+Q14： getUserInfo 接口获取不到 unionid ，该怎么办？
+
+A：需要到微信开放平台网站（
+
+https://open.weixin.qq.com）
+
+绑定小程序和你的其他公众号或 app，才会返回 unionid 
+。
+
+Q15：小程序路由 /info?appId=1 ，通过 wb.navigateTo 跳转页面后。如何在新的页面中拿到 appId 的值？
+
+A：可以通过 Page 的 onLoad 事件拿到，可以参考 navigator 组件
+
+Q16：微信小程序支持和硬件的交互吗？比如和硬件通过蓝牙或者 Wi-Fi 的方式进行数据通信？
+
+A：我们正在规划中，目前暂不支持
+
+Q17：小程序通过 wx.setStorage(OBJECT) 存储数据的容量的限制是多少？
+
+A：目前每个小程序限制在 5 MB 以内。
+
+Q18：下载下来的 ZIP 文件如何解压缩，是否有相关 API？
+
+A：目前暂不支持，我们将很快提供。
+
+Q19：请问微信公众号开发功能除了调用微信提供的 API 之外，可以调用自己写的 API 接口或者服务吗？
+
+A：可以使用 request 接口请求自己的服务器 API。
+
+Q20：开发者工具如何录音，录音完成是什么格式呢？
+
+A：暂不支持模拟录音，手机上录音目前是 SILK 格式。
+
+Q21：WXML 中 Mustache 语法（双大括号）来绑定数据，如果对应的目标数据是一段 HTML 文本，能不能绑定？应该怎么绑定？
+
+A：目前不支持绑定 HTML 代码。
+
+Q22：代码里面可以用一些工具库吗？比如可以通过 npm install 这种方式来安装第三方的工具库。
+
+A：目前暂不支持。
+
+Q23：小程序是否开放用户手机通讯录的读取/写入权限？
+
+A：目前暂不支持。
+
+Q24：好像无法通过 JS 获取图片宽和高，请问有解决方案吗？
+
+A：目前只能显示设置图片宽高。
+
+Q25：iPad 好像无法预览小程序？
+
+A：小程序目前暂不支持 iPad。
+
+Q26：微信小程序有拨打电话和发送 Email 的方法吗？
+
+A：可以拨打电话，暂不支持发送 Email。
+
+Q27：如果是支付给子商户，调用接口跟之前 web 开发的用法是一样的吗？还是有特殊的操作？
+
+A：目前暂不支持支付给子商户。
+
+Q28：请问小程序里支持把文字、图片、链接转发给好友、朋友圈吗？
+
+A：分享能力会很快提供，请留意官方文档。
+
+Q29：请问微信小应用除了自带的 API 接口， 是否支持其他的外部 API 或 JS 插件的加载？
+
+A：目前暂不支持。
+
+Q30：我调用小程序的微信支付 API，一直报签名验证错误，参与签名的参数有 timeStamp 、 nonceStr 、 package 、 signType 。使用微信支付签名校验工具生成的签名跟我自己服务器生成的签名是一样的，但还是报签名错误。
+
+A：a ppId 不需要传入支付 API，但是需要参与签名。
+
+Q31： checkbox 是否只能通过 checkbox-group 绑定事件？
+
+A： checkbox 不会触发 change 事件, checkbox-group 才会触发。
+
+工具 FAQ
+
+Q1：更新工具前，代码中定义函数，返回 Promise，return new Promise(function(resolve, reject){ …. }) ，更新后，报错： TypeError: Promise is not a constructor ，请问是哪里出了问题？
+
+A：为了保证三端的统一，0.11.112300 版本的工具移除 Promise ，开发者需要自行引入兼容库。
+
+Q2：工具更新成最新版（0.11.112300）WXML 访问一个不存在变量的属性值会报错，而且之前没有报错。
+
+A：0.11.112300 增加了模拟器的错误显示，旧版本是没有显示错误信息的，后续新版我们会做兼容处理。但是建议开发者自行检查代码，避免这种不严谨的代码投入到真正的生产环境中。
+
+Q3：在 Mac 上开发，每当跳转第二个页面时，WXML 调试工具没有调试信息，是怎么回事？
+
+A：已经修复，需要下个版本。
+
+Q4：开发工具不支持 Linux 环境以及 Windows 2003/XP 系统吗？
+
+A：是的，目前不支持。
+
+Q6：我在一台机器上同时开发微信小程序和服务器程序，请问微信小程序在开发时怎么访问我本机的服务器呢？
+
+A：目前服务器必须使用域名，不支持本地调试。
+
+运营 FAQ
+
+Q1：怎样直接给审查人员发反馈？
+
+A：我们会在后续的微信公众平台小程序提交审核页面，增加测试帐号（帐号+密码形式），以及审核描述等的填写。关于审核的问题，可以发送邮件至：AppReview@tencent.com，我们会安排专人查看反馈。
+
+Q2：个人开发者不能注册么？
+
+A：现在支持的只有企业、政府、媒体、其他组织，个人开发者还不支持注册。
