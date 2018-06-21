@@ -1,39 +1,61 @@
 ---
 layout: post
-title: "机器学习入门（名词科普）"
+title: "小程序小知识"
 date: 2016-07-05 
-description: "机器学习入门篇"
-tag: 机器学习  
-
+description: "小程序小知识"
+tag: 小程序小知识  
 ---     
-
-### 通用名词  
-
-#### ML
-
-　　**名词解释：** 机器学习(Machine Learning)是一门多领域交叉学科，涉及概率论、统计学、逼近论、凸分析、算法复杂度理论等多门学科。专门研究计算机怎样模拟或实现人类的学习行为，以获取新的知识或技能，重新组织已有的知识结构使之不断改善自身的性能。
-　　它是人工智能的核心，是使计算机具有智能的根本途径，其应用遍及人工智能的各个领域，它主要使用归纳、综合而不是演绎。
-
-#### DL
-　　**名词解释：** 深度学习（Deep Learning）是机器学习拉出的分支，它试图使用包含复杂结构或由多重非线性变换构成的多个处理层对数据进行高层抽象的算法。          
-　　深度学习是机器学习中表征学习方法。观测值（例如一幅图像）可以使用多种方式来表示，如每个像素强度值的矢量，或者更抽象地表示成一系列边、特定形状的区域等。而使用某些特定的表示方法更容易从实例中学习任务（例如，人脸识别或面部表情识别）。深度学习的好处是将用非监督式或半监督式的特征学习和分层特征提取的高效算法来替代手工获取特征。
+1，小程序中没有的标签：a标签，div标签，需要点击元素跳转时有两种办法：
+    ①在wxml页面中使用navigate标签
+    例如：<navigator  url="../main/index">sdsfgf</navigator> 注意：url中的地址只能写在app.js中注册过的页面。
+   不然报错：   
+   ②绑定bindtap事件，然后在点击的时候使用wx.naviagateTo({})跳转到相应页面。
+         
+二。button的disabled属性的作用：比如将一个button作为表单的提交按钮，为了防止用户不停点击向服务器发送请求，所以在没有达到要求之前（比如输入内容不符合规则）,使其无法点击
 
 
-#### CNN
-　　**名词解释：** 卷积神经网络（Convolutional neural networks，简称CNNs）是一种深度的监督学习下的机器学习模型
+三。var that=this; 有时看到这行，这个是因为this作用域问题。比如
+bindonetap:functin(){
+var that=this   
+wx.getUserInfo({
+ this._________________//这里边的this就是指向这个函数的
+ that._________________//这里边的that就是指向外层函数的
+})
+}
+四。onshareappmessage的path路径必须要写全。比如 path:'pages/share/share?id=3'(不要粗心，我因为把pages写成了page，一直找不到原因)
 
-### 算法名词
 
-#### KNN:
+五。animation动画，
+首先在wxml文件中应该有一个组件。<viewanimation="{{animationData}}"style="background:red;height:100rpx;width:100rpx"></view>
+Page({})文件中的data中有一个animation属性，data: {animationData: {}}
 
-　　**名词解释：** 邻近算法，或者说K最近邻(kNN，k-NearestNeighbor)分类算法。
-　　邻近算法是数据挖掘分类技术中最简单的方法之一。所谓K最近邻，就是k个最近的邻居的意思，说的是每个样本都可以用它最接近的k个邻居来代表。
-　　kNN算法的核心思想是如果一个样本在特征空间中的k个最相邻的样本中的大多数属于某一个类别，则该样本也属于这个类别，并具有这个类别上样本的特性。该方法在确定分类决策上只依据最邻近的一个或者几个样本的类别来决定待分样本所属的类别。 kNN方法在类别决策时，只与极少量的相邻样本有关。由于kNN方法主要靠周围有限的邻近的样本，而不是靠判别类域的方法来确定所属类别的，因此对于类域的交叉或重叠较多的待分样本集来说，kNN方法较其他方法更为适合。
 
-#### SVM:
-　　**名词解释：** 支持向量机（Support Vector Machine）。
-　　在机器学习领域，支持向量机SVM(Support Vector Machine)是一个有监督的学习模型，通常用来进行模式识别、分类、以及回归分析。
+六。可以直接使用this.__，即使这个__在上文没有定义过，也可以直接使用。
 
-<br>
 
-转载请注明：[潘柏信的博客](http://baixin) » [点击阅读原文](http://baixin.io/2016/07/MachineLearning_introduce/)
+7.因为小程序代码的运行环境并不是浏览器，所以并没有window,document对象，即有些 js文件是没法用的。
+
+
+8.替换字符串。只有replace()方法，没有replaceall()方法。
+
+
+9.微信小程序  导航栏设置
+在app.json中配置
+{
+  "window":{
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "微信接口功能演示",
+    "backgroundColor": "#eeeeee",
+    "backgroundTextStyle": "light"
+  }
+}
+
+
+10.小程序中使用的图片的名字前缀不要用中文
+
+
+11.小程序中无法使用 <x< 只可以写成 <x&&x> 这种形式（不可以连着写）
+
+
+12.wx.getSystemInfo({})和wx.getSystemInfoSync()获取的返回值有两种，screenheight(屏幕高度)和windowheight（屏幕可用高度）使用setinterval(functions(){},时间)的时候，时间参数可以选择40,看起来比较流畅
