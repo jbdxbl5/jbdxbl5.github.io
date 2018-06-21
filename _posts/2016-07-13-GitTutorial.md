@@ -1,71 +1,64 @@
 ---
 layout: post
-title: "Git教程"
+title: "微信小程序之生命周期"
 date: 2016-07-13   
-tag: 工具 
+tag: 微信小程序之生命周期 
 ---
+本篇文章介绍小程序的生命周期，由于小程序分为应用和页面两个部分，所以小程序的生命周期就涉及到三个部分，分别是：
 
-### 介绍       
+应用的生命周期
+页面的生命周期
+应用的生命周期对页面生命周期的影响
+一、应用的生命周期
+App() 函数用来注册一个小程序。接受一个 object 参数，其指定小程序的生命周期函数等。
 
-　　Git是做项目的版本管理，你也可以称它们为版本管理工具。假如现在你有一个文件夹，里面可以是项目，也可以是你的个人笔记(如我这个博客)，或者是你的简历、毕业设计等等，都可以使用git来管理。
+object参数说明：
 
-　　目前常用的版本控制器有Git和SVN，即使这两个你没有全用过，至少也会听过，我这里以Git为例，个人比较喜欢Git，你也可以看看这篇文章：[为什么Git比SVN好](http://www.worldhello.net/2012/04/12/why-git-is-better-than-svn.html)。我使用的是Mac，Mac上没自带Git环境，但是作为iOS开发者，我安装Xcode的时候，Xcode里是有自带Git的，所以我不需要考虑怎么去安装Git了。          
+属性	类型	描述	触发时机
+onLaunch	Function	生命周期函数--监听小程序初始化	当小程序初始化完成时，会触发 onLaunch（全局只触发一次）
+onShow	Function	生命周期函数--监听小程序显示	当小程序启动，或从后台进入前台显示，会触发 onShow
+onHide	Function	生命周期函数--监听小程序隐藏	当小程序从前台进入后台，会触发 onHide
+前台、后台定义： 当用户点击左上角关闭，或者按了设备 Home 键离开微信，小程序并没有直接销毁，而是进入了后台；当再次进入微信或再次打开小程序，又会从后台进入前台。
 
-### 安装Git
+作者：爱情小傻蛋
+链接：https://www.jianshu.com/p/0078507e14d3
+來源：简书
+简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。
+用户首次打开小程序，触发 onLaunch（全局只触发一次）。
+小程序初始化完成后，触发onShow方法，监听小程序显示。
+小程序从前台进入后台，触发 onHide方法。
+小程序从后台进入前台显示，触发 onShow方法。
+小程序后台运行一定时间，或系统资源占用过高，会被销毁。
+注意：
+App() 必须在 app.js 中注册，且不能注册多个。
 
-**在Mac OS X上安装Git**      
+不要在定义于 App() 内的函数中调用 getApp() ，使用 this 就可以拿到 app 实例。
 
-提供两种方法参考：      
+不要在 onLaunch 的时候调用 getCurrentPage()，此时 page 还没有生成。
 
-> 1、通过homebrew安装Git，具体方法请参考[homebrew的文档](http://brew.sh/)      
-> 2、直接从AppStore安装Xcode，Xcode集成了Git，不过默认没有安装，你需要运行Xcode。     
+通过 getApp() 获取实例之后，不要私自调用生命周期函数。
 
-**在Windows上安装Git**      
+页面的生命周期
+Page()函数用来注册一个页面。接受一个 object 参数，其指定页面的初始数据、生命周期函数、事件处理函数等。
+object 参数说明：
 
-> 从[https://git-for-windows.github.io](https://git-for-windows.github.io) 下载，然后按默认选项安装即可，安装完成后，在开始菜单里找到“Git”->“Git Bash”，蹦出一个类似命令行窗口的东西，就说明Git安装成功！
+属性	类型	描述
+data	Object	页面的初始数据
+onLoad	Function	生命周期函数--监听页面加载
+onReady	Function	生命周期函数--监听页面初次渲染完成
+onShow	Function	生命周期函数--监听页面显示
+onHide	Function	生命周期函数--监听页面隐藏
+onUnload	Function	生命周期函数--监听页面卸载
 
+小程序注册完成后，加载页面，触发onLoad方法。
+页面载入后触发onShow方法，显示页面。
+首次显示页面，会触发onReady方法，渲染页面元素和样式，一个页面只会调用一次。
+当小程序后台运行或跳转到其他页面时，触发onHide方法。
+当小程序有后台进入到前台运行或重新进入页面时，触发onShow方法。
+当使用重定向方法wx.redirectTo(OBJECT)或关闭当前页返回上一页wx.navigateBack()，触发onUnload。
 
-### 配置Git      
-
-安装完成后，还需要最后一步设置，在命令行输入：
-
->* $ git config --global user.name "Your Name"
->* $ git config --global user.email "email@example.com"
-
-"Your Name"： 是每次提交时所显示的用户名，因为Git是分布式版本控制系统，当我们push到远端时，就需要区分每个提交记录具体是谁提交的，这个"Your Name"就是最好的区分。          
-
-"email@example.com"： 是你远端仓库的email       
-
---global：用了这个参数，表示你这台机器上所有的Git仓库都会使用这个配置，当然我们也可以对某个仓库指定不同的用户名和Email地址。         
-
-
-
-### 开始使用-建立仓库：
-
-你在目标文件夹下使命令：    
-
->* git init  （创建.git文件）      
-
-就会创建一个 `.git` 隐藏文件，相当于已经建立了一个本地仓库。
-
-**添加到暂存区：**      
-
->* git add .   （全部添加到暂存区）    
->* git commit -m ' first commit'  （提交暂存区的记录到本地仓库）     
-
-
-### 其它   
-
-git branc 查看时如出现
-
->*  (HEAD detached at analytics_v2)   
->*  dev
->*  master
-
-代表现在已经进入一个临时的HEAD，可以使用 `git checkout -b temp` 创建一个 temp branch，这样临时HEAD上修改的东西就不会被丢掉了。
-然后切换到 dev 分支上，在使用 git branch merge temp，就可以把 temp 分支上的代码合并到 dev 上了。
-
-<br>
-
-转载请注明：[潘柏信的博客](http://baixin) » [点击阅读原文](http://baixin.io/2016/07/GitTutorial/)     
+作者：爱情小傻蛋
+链接：https://www.jianshu.com/p/0078507e14d3
+來源：简书
+简书著作权归作者所有，任何形式的转载都请联系作者获得授权并注明出处。
 
