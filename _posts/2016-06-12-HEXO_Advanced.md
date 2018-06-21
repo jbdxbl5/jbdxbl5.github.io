@@ -139,10 +139,7 @@ Page({
 2.popMenu.wxml
 
 <view>  
-  <image src="/pages/images/collect.png" class="img-style" animation="{{animCollect}}" bindtap="collect"></image>  
-  <image src="/pages/images/transpond.png" class="img-style" animation="{{animTranspond}}" bindtap="transpond"></image>  
-  <image src="/pages/images/input.png" class="img-style" animation="{{animInput}}" bindtap="input"></image>  
-  <image src="/pages/images/plus.png" class="img-plus-style" animation="{{animPlus}}" bindtap="plus"></image>  
+  
 </view>
 
 3.popMenu.wxss
